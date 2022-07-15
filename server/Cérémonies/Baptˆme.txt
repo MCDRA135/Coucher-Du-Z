@@ -1,0 +1,8 @@
+label:Bâtiment Notre-Dame - Baptême
+width:50
+height:80
+padding:25
+ids:
+void, 344 , void, 342 ,void , 340 ,void , 338 ,void , 336 ,void , 334 ,void
+244 ,void , 242 ,void , 240 ,void , 238 ,void , 236 ,void , 234 ,void , 232
+void,void ,void ,void ,void ,Gauche,void ,Droit,void ,void ,void ,void ,void

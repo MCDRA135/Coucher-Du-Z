@@ -1,0 +1,10 @@
+1. Installer python (la dernière version, ou 3.10.) dans l'installation, il faut bien cocher ajouter au PATH et installer tk.
+2. Installer les modules nécessaires à l'aide de pip qui a été installé par python, pour le faire :
+	2.1. Ouvrir une console (windows + R, écrire cmd) puis écrire "pip install numpy", attendre que l'installation se fasse
+	2.3. "pip install future"
+3. Lancer l'application en allant dans le dossier où se trouve SpotsControl JA, cliquer à côté droit en maintenant le shift et faire
+	ouvrir une fenêtre powershell ici, puis écrire dans powershell "python SpotsControl JA.py".
+4. Si vous voyez qu'il y a un problème, c'est qu'il faut se créer un compte ngrok. Pour ce faire, aller sur dashboard.ngrok.com et 
+	se connecter d'une manière ou d'une autre.
+5. Il faut télécharger et installer ngrok, utiliser "pip install pyngrok"
+6. Lancer l'application avec "python SpotsControl JA.py", normalement cette fois tout marche

@@ -1,0 +1,5 @@
+on note dans ce fichier les identifiants de chaque case de la matrice pour pemettre au programme d'envoyer l'information au bon endroit
+
+344 , 342 , 340 , 338 , 336 , 334
+244 , 242 , 240 , 238 , 236 , 234
+144 , 142 , 140 , 138 , 136 , 134

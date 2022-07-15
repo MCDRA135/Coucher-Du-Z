@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> pour éventuellement mettre une icône ... -->
+
+    <title>Coucher du Z, Client</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<!-- NoSleep -->
+	<script src="NoSleep.js"></script>
+  </head>
+
+  
+ 
+   <body>
+	<header class="container-fluid d-flex bg-primary">
+		<div class="h2 mb-3 font-weight-bold float-right" style="color : #EEE" >Coucher du Z</div>
+	</header>
+	
+	<!-- Ecran de connexion au programme de contrôle -->
+	<div id="ConnexionScreen">
+		<div class="h3 mb-3 font-weight-normal" style="margin : 10px " >Connexion</div>
+		
+		<div class="container" >
+		  <div class="text-center mb-4">
+			<h2 class="h4 mb-3 font-weight-normal"> Id du t&eacutel&eacutephone (num&eacutero de piaule) </h2>
+		  </div>
+
+		  <div class="form-label-group">
+			<textarea  class="container" maxlength=200 rows=1 cols=50 placeholder="Id :" name ="phoneId" id ="phoneId" required></textarea>
+		  </div>
+		  
+		  <div class="text-center mb-4">
+			<h2 class="h4 mb-3 font-weight-normal">Adresse du programme de contr&ocircle</h2>
+		  </div>
+		  
+		  <div class="form-label-group">
+			<textarea  class="container" maxlength=200 rows=1 cols=50 placeholder="Adresse Web:" name ="masterAdress" id ="masterAdress" required>ws://0.tcp.eu.ngrok.io:</textarea> <!-- adresse par défaut pour éviter de la recopier-->
+		  </div>
+		  
+		  <button class="btn btn-lg btn-primary btn-block" type="submit" id ="submitButton" onclick='connect()'>Connexion</button>
+		</div>
+	</div>
+	
+	<!-- Ecran de l'application principale -->
+	<div id="ClientScreen" style="visibility: hidden" >
+		<div class="h3 mb-3 font-weight-normal" style="margin : 10px " id ="message" >en attente de Connexion</div>
+		<p class="mt-5 mb-3 h4 text-center" id = "text"> </p>
+		
+		
+	</div>
+	
+	<p class="mt-5 mb-3 text-muted text-center" id = "footerTxt">Lyc&eacutee Sainte Genevi&egraveve - 2019</p>
+  </body>
+  
+  
+  <script>
+	var connScreen = document.getElementById('ConnexionScreen');
+	var clientScreen = document.getElementById('ClientScreen');
+	var msgLabel = document.getElementById('message');
+	var running = true;
+	var AreaPhoneId = document.getElementById('phoneId');
+	var AreaMasterAdress = document.getElementById('masterAdress');
+	var socket
+	var intervalID 
+	var intervalTime = 3  //intervalle de temps (min) entre deux messages 'KeepAlive' pour maintenir la connexion
+	var noSleep = new NoSleep();
+	
+	var audio = document.createElement("AUDIO");
+	audio.setAttribute("src","SingalDC-1h.mp3")
+	audio.loop = true ;
+	audio.setAttribute("controls", "controls");
+	clientScreen.appendChild(audio);
+	
+	
+	const text = document.getElementById('text');
+	
+	function connect(){
+
+		var masterAdress = AreaMasterAdress.value
+		var phoneId = AreaPhoneId.value
+		
+		if(phoneId == ''){return}  												//on s'assure que les champs sont bien remplis
+		
+		connScreen.style.display = 'none';
+		clientScreen.style.visibility = 'visible';
+		audio.play();
+		
+		noSleep.enable();
+		
+		socket = new WebSocket(masterAdress);
+		socket.setKeepAlive = true;
+		console.log('masterAdress = ' + masterAdress)
+		intervalID = setInterval(function(){socket.send("KeepAlive");}, (intervalTime*60*1000));
+
+		
+		socket.onmessage = function(event){
+			const msg = event.data
+			console.log("received :"+ msg)
+			switch(msg){
+			  case "on":
+				document.body.style.background = 'white';
+				audio.play();
+				break;
+			  case "off":
+				document.body.style.background = 'black';
+				audio.pause();
+				break;
+			  case "end":
+				running = false;
+				socket.close();
+				msgLabel.innerHTML = "Connexion ferm&eacutee";
+				document.body.style.background = 'white';
+				break;
+			  case "identifiant non reconnu":
+				running = false;
+				socket.close();
+				msgLabel.innerHTML = "Identifiant non valide, Connexion ferm&eacutee";
+				document.body.style.background = 'white';
+				break;
+			  case "KeepAlive":
+				break;
+			  default:
+				msgLabel.innerHTML = msg;
+				}
+				
+		socket.onclose= function(event){
+		console.log("connexion closed")
+		}
+			
+			}
+		
+		socket.onopen  = function(){
+				
+			msgLabel .innerHTML = "connect&eacute !"
+			console.log("connecte ! : Socket Status: "+socket.readyState);
+			socket.send("id =" + phoneId);										//on envoie notre id au server 
+			}
+			
+	}
+
+	
+  </script>
+</html>

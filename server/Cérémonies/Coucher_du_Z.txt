@@ -1,0 +1,8 @@
+label:Bâtiment Sainte Geneviève - Coucher du Z
+width:70
+height:130
+padding:40
+ids:
+344 , 342 , 340 , 338 , 336 , 334
+244 , 242 , 240 , 238 , 236 , 234
+144 , 142 , 140 , 138 , 136 , 134

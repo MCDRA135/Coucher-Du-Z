@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>CDZ Client</title>
+
+  <!-- Import des polices -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Le style du document -->
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Header */
+    header {
+      width: 100%;
+      height: 100px;
+      background-color: #8bc3f7;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    /* Ecran de base connexion */
+    section#connexion {
+      width: 100%;
+      height: 300px;
+
+      box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.75) inset;
+      background-color: white;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      transition: all .2s ease-in;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    h3 {
+      margin: 0;
+      margin-bottom: 15px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    button {
+      margin-top: 15px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+    }
+
+    /* Ecran connecté */
+    section#connexion.connected {
+      height: 50px;
+      background-color: #8bc3f7;
+      box-shadow: none;
+    }
+
+    section#connexion.connected h3 {
+      display: none
+    }
+
+    section#connexion.connected textarea {
+      display: none
+    }
+
+    section#connexion.connected button {
+      display: none
+    }
+
+    /* Partie gestion des lumières une fois connecté */
+    section#gestion {
+      width: 100%;
+      height: 90vh;
+      background-color: #2E2E2E;
+
+      display: grid;
+      grid-template-columns: 50px 1fr 1fr 1fr 50px;
+      grid-template-rows: 50px 4fr 1fr 50px;
+      align-items: center;
+      justify-items: center;
+
+      grid-template-areas:
+        ". . . . ."
+        ". article1 article2 article3 ."
+        ". title1 title2 title3 ."
+        ". . . . .";
+    }
+
+    section#gestion h2 {
+      height: 80%;
+      width: 70%;
+      align-self: start;
+
+      background-color: white;
+      color: black;
+      text-align: center;
+      border-radius: 0 0 15px 15px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    section#gestion article {
+      height: 90%;
+      width: 70%;
+      align-self: end;
+
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 50px 50px 0 0;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    section#gestion h2:nth-child(1) {
+      grid-area: title1;
+    }
+
+    section#gestion h2:nth-child(2) {
+      grid-area: title2;
+    }
+
+    section#gestion h2:nth-child(3) {
+      grid-area: title3;
+    }
+
+    section#gestion article:nth-child(4) {
+      grid-area: article1;
+    }
+
+    section#gestion article:nth-child(5) {
+      grid-area: article2;
+    }
+
+    section#gestion article:nth-child(6) {
+      grid-area: article3;
+    }
+
+    section#gestion button {
+      width: 100px;
+      height: 50px;
+    }
+
+    textarea#duration {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+
+<!-- Le contenu du document -->
+
+<body>
+  <header>
+    <h1>Coucher du Z</h1>
+  </header>
+
+  <main>
+
+    <section id="connexion">
+      <h2>Connexion</h2>
+      <h3>au serveur python</h3>
+      <textarea maxlength=200 rows=1 cols=50 placeholder="Numéro de piaule (ex 340)" name="phoneId" id="phoneId"
+        required></textarea>
+      <textarea maxlength=200 rows=1 cols=50 placeholder="Adresse ngrok du serveur" name="masterAdress"
+        id="masterAdress" required>ws://0.tcp.eu.ngrok.io:</textarea>
+      <button id="submitButton" onclick='connect()'>CONFIRMER</button>
+    </section>
+
+    <section id="gestion">
+      <!-- Il va y avoir une grille, il faut mettre la fréquence, une petite lumière qui indique l'état,
+      des boutons pour manipuler l'audio (un resume, un suspend, un pulse), un pad pour gérer les fréquences de base,
+      un input pour les durées aussi -->
+
+      <h2>Gestion</h2>
+      <h2>Fréquences</h2>
+      <h2>Etat</h2>
+      <article>
+        <button class="play">JOUER</button>
+        <button class="pause">PAUSE</button>
+        <button class="pulse">PULSATION</button>
+        <textarea name="duration" id="duration" cols="11" rows="1" placeholder="Durée (ms)">50</textarea>
+      </article>
+      <article></article>
+      <article></article>
+    </section>
+
+  </main>
+
+  <footer></footer>
+
+  <!-- Ecran de l'application principale -->
+  <div id="ClientScreen" style="visibility: hidden">
+    <div class="h3 mb-3 font-weight-normal" style="margin : 10px " id="message">en attente de Connexion</div>
+    <p class="mt-5 mb-3 h4 text-center" id="text"> </p>
+
+    <textarea style="display: block;" class="container" maxlength=200 rows=1 cols=50 placeholder="Fréquence :"
+      name="frequence" id="frequence1" required>697</textarea>
+
+    <textarea style="display: block;" class="container" maxlength=200 rows=1 cols=50 placeholder="Fréquence :"
+      name="frequence" id="frequence2" required>1209</textarea>
+
+    <button style="display: block;" onClick="resumeAudio()">Resume</button>
+    <button style="display: block;" onClick="suspendAudio()">Suspend</button>
+    <button style="display: block;" onClick="sendSoundPulse()">Pulse</button>
+
+    <textarea style="display: block;" class="container" maxlength=200 rows=1 cols=50
+      placeholder="Durée de la pulsation (ms) :" name="duration" id="duration" required>1000</textarea>
+  </div>
+
+  <p class="mt-5 mb-3 text-muted text-center" id="footerTxt">Lyc&eacutee Sainte Genevi&egraveve - 2019</p>
+</body>
+
+
+<script>
+  var connScreen = document.getElementById('ConnexionScreen');
+  var clientScreen = document.getElementById('ClientScreen');
+  var msgLabel = document.getElementById('message');
+  var running = true;
+  var AreaPhoneId = document.getElementById('phoneId');
+  var AreaMasterAdress = document.getElementById('masterAdress');
+  var socket
+  var intervalID
+  var intervalTime = 3  //intervalle de temps (min) entre deux messages 'KeepAlive' pour maintenir la connexion
+
+  const context = new (window.AudioContext || window.webkitAudioContext)()
+
+  const dialTone = function (freq1, freq2) {
+    oscillator1 = context.createOscillator();
+    oscillator1.type = 0;
+    oscillator1.frequency.value = freq1;
+    gainNode = context.createGain ? context.createGain() : context.createGainNode();
+    oscillator1.connect(gainNode, 0, 0);
+    gainNode.connect(context.destination);
+    gainNode.gain.value = .1;
+    oscillator1.start ? oscillator1.start(0) : oscillator1.noteOn(0)
+
+    oscillator2 = context.createOscillator();
+    oscillator2.type = 0;
+    oscillator2.frequency.value = freq2;
+    gainNode = context.createGain ? context.createGain() : context.createGainNode();
+    oscillator2.connect(gainNode);
+    gainNode.connect(context.destination);
+
+    gainNode.gain.value = .1;
+    oscillator2.start ? oscillator2.start(0) : oscillator2.noteOn(0)
+
+  };
+
+  function stop() {
+    oscillator1.disconnect();
+    oscillator2.disconnect();
+  }
+
+  let resumeAudio = function () {
+    dialTone(document.getElementById("frequence1").value, frequence2 = document.getElementById("frequence2").value)
+  }
+  let suspendAudio = function () {
+    stop()
+  }
+
+  function sendSoundPulse() {
+    resumeAudio()
+    const pulseDuration = parseInt(document.getElementById("duration").value)
+    setTimeout(() => suspendAudio(), pulseDuration)
+  }
+
+  let triggerMode = "play to light" || "play to resume play to suspend"
+
+  function connect() {
+    var masterAdress = AreaMasterAdress.value
+    var phoneId = AreaPhoneId.value
+    console.log(phoneId)
+
+    if (phoneId == '') { return }  												//on s'assure que les champs sont bien remplis
+
+    connScreen.style.display = 'none';
+    clientScreen.style.visibility = 'visible';
+
+    socket = new WebSocket(masterAdress);
+    socket.setKeepAlive = true;
+    console.log('masterAdress = ' + masterAdress)
+    intervalID = setInterval(function () { socket.send("KeepAlive"); }, (intervalTime * 60 * 1000));
+
+
+    socket.onmessage = function (event) {
+      const msg = event.data
+      console.log("received :" + msg)
+
+      if (msg === "on" + phoneId && document.body.style.background == "black") {
+        document.body.style.background = 'white'
+        sendSoundPulse()
+      }
+      else if (msg === "off" + phoneId && document.body.style.background == "white") {
+        document.body.style.background = 'black';
+        sendSoundPulse();
+      }
+      else if (msg === "end") {
+        running = false;
+        socket.close();
+        msgLabel.innerHTML = "Connexion ferm&eacutee";
+        document.body.style.background = 'white';
+      }
+      else if (msg === "identifiant non reconnu") {
+        running = false;
+        socket.close();
+        msgLabel.innerHTML = "Identifiant non valide, Connexion ferm&eacutee";
+        document.body.style.background = 'white';
+      }
+      else if (msg === "KeepAlive") {
+      }
+      else {
+        msgLabel.innerHTML = msg;
+      }
+
+      socket.onclose = function (event) {
+        console.log("connexion closed")
+      }
+
+    }
+
+    socket.onopen = function () {
+      msgLabel.innerHTML = "connect&eacute !"
+      console.log("connecte ! : Socket Status: " + socket.readyState);
+      socket.send("id =" + phoneId);										//on envoie notre id au server 
+      console.log(phoneId)
+
+      document.getElementById('connexion').classList.add('connected')
+      document.getElementsByTagName('h1')[0].innerHTML = "Connecté ! Numéro de piaule : " + phoneId + " adresse du serveur : " + masterAdress;
+    }
+
+  }
+
+
+</script>
+
+</html>
