@@ -16,6 +16,14 @@
 
   <!-- Le style du document -->
   <style>
+    :root {
+      --pink-color: #f3abfd;
+      --blue-color: #8bc3f7;
+      --yellow-color: #f8ed93;
+      --green-color: #abfdb9;
+      --darkgrey-color: #2E2E2E;
+    }
+
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
@@ -25,7 +33,7 @@
     header {
       width: 100%;
       height: 100px;
-      background-color: #8bc3f7;
+      background-color: var(--blue-color);
 
       display: flex;
       justify-content: center;
@@ -77,31 +85,35 @@
     /* Ecran connecté */
     section#connexion.connected {
       height: 50px;
-      background-color: #8bc3f7;
+      background-color: var(--blue-color);
       box-shadow: none;
     }
 
     section#connexion.connected h3 {
-      display: none
+      display: none;
+    }
+
+    section#connexion.connected h3.message {
+      display: block;
     }
 
     section#connexion.connected textarea {
-      display: none
+      display: none;
     }
 
     section#connexion.connected button {
-      display: none
+      display: none;
     }
 
     /* Partie gestion des lumières une fois connecté */
     section#gestion {
       width: 100%;
       height: 90vh;
-      background-color: #2E2E2E;
+      background-color: var(--darkgrey-color);
 
       display: grid;
       grid-template-columns: 50px 1fr 1fr 1fr 50px;
-      grid-template-rows: 50px 4fr 1fr 50px;
+      grid-template-rows: 50px 3fr 1fr 1fr 50px;
       align-items: center;
       justify-items: center;
 
@@ -109,23 +121,44 @@
         ". . . . ."
         ". article1 article2 article3 ."
         ". title1 title2 title3 ."
+        ". desc1 desc2 desc3 ."
         ". . . . .";
     }
 
     section#gestion h2 {
-      height: 80%;
+      height: 100%;
       width: 70%;
       align-self: start;
 
       background-color: white;
       color: black;
       text-align: center;
-      border-radius: 0 0 15px 15px;
+      /* border-radius: 0 0 15px 15px; */
 
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
     }
+
+    section#gestion h2::before,
+    section#gestion h2::after {
+      content: "";
+      width: 30px;
+      height: 30px;
+      position: absolute;
+
+      border-radius: 5px;
+    }
+
+    section#gestion h2::before {
+      align-self: flex-start;
+    }
+
+    section#gestion h2::after {
+      align-self: flex-end;
+    }
+
 
     section#gestion article {
       height: 90%;
@@ -141,16 +174,65 @@
       justify-content: center;
     }
 
+    section#gestion .desc {
+      height: calc(80% - 10px);
+      width: calc(70% - 10px);
+      padding-top: 10px;
+      padding-inline: 5px;
+      align-self: start;
+
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 0 0 20px 20px;
+
+      font-size: 10px;
+      text-align: center;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
     section#gestion h2:nth-child(1) {
       grid-area: title1;
+    }
+
+    section#gestion h2:nth-child(1)::before {
+      transform: translate(40px, 15px) rotate(45deg);
+      background-color: var(--pink-color);
+    }
+
+    section#gestion h2:nth-child(1)::after {
+      transform: translate(-50px, -15px) rotate(45deg);
+      background-color: var(--yellow-color);
     }
 
     section#gestion h2:nth-child(2) {
       grid-area: title2;
     }
 
+    section#gestion h2:nth-child(2)::before {
+      transform: translate(35px, -5px) rotate(45deg);
+      background-color: var(--blue-color);
+    }
+
+    section#gestion h2:nth-child(2)::after {
+      transform: translate(-30px, 15px) rotate(45deg);
+      background-color: var(--green-color);
+    }
+
     section#gestion h2:nth-child(3) {
       grid-area: title3;
+    }
+
+    section#gestion h2:nth-child(3)::before {
+      transform: translate(28px, 10px) rotate(45deg);
+      background-color: var(--blue-color);
+    }
+
+    section#gestion h2:nth-child(3)::after {
+      transform: translate(-35px, -10px) rotate(45deg);
+      background-color: var(--pink-color);
     }
 
     section#gestion article:nth-child(4) {
@@ -165,6 +247,18 @@
       grid-area: article3;
     }
 
+    section#gestion .desc:nth-child(7) {
+      grid-area: desc1;
+    }
+
+    section#gestion .desc:nth-child(8) {
+      grid-area: desc2;
+    }
+
+    section#gestion .desc:nth-child(9) {
+      grid-area: desc3;
+    }
+
     section#gestion button {
       width: 100px;
       height: 50px;
@@ -173,7 +267,65 @@
     textarea#duration {
       margin-top: 15px;
     }
+
+    .frequences {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .frequences textarea {
+      margin: 7px;
+    }
+
+    .preset {
+      width: 80%;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .preset button {
+      width: 33px !important;
+      height: 33px !important;
+      margin: 7px;
+    }
+
+    #state {
+      width: 150px;
+      height: 150px;
+
+      background-color: black;
+      border-radius: 20px;
+      box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.75);
+
+      transition: all .1s;
+    }
+
+    #state.on {
+      background-color: var(--yellow-color);
+      box-shadow: 0px 0px 20px -5px rgba(255, 255, 255, 0.75);
+    }
+
+    footer {
+      width: 100%;
+      height: 50px;
+      background-color: var(--darkgrey-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    section#tutorial {
+      height: 500px;
+      background-color: white;
+    }
   </style>
+
 </head>
 
 
@@ -189,6 +341,7 @@
     <section id="connexion">
       <h2>Connexion</h2>
       <h3>au serveur python</h3>
+      <h3 id="message"></h3>
       <textarea maxlength=200 rows=1 cols=50 placeholder="Numéro de piaule (ex 340)" name="phoneId" id="phoneId"
         required></textarea>
       <textarea maxlength=200 rows=1 cols=50 placeholder="Adresse ngrok du serveur" name="masterAdress"
@@ -204,158 +357,198 @@
       <h2>Gestion</h2>
       <h2>Fréquences</h2>
       <h2>Etat</h2>
+
       <article>
-        <button class="play">JOUER</button>
-        <button class="pause">PAUSE</button>
-        <button class="pulse">PULSATION</button>
+        <!-- <button class="play">PLAY</button>
+        <button class="pause">PAUSE</button> -->
+        <button class="pulse" onclick="sendPulse()">PULSE</button>
         <textarea name="duration" id="duration" cols="11" rows="1" placeholder="Durée (ms)">50</textarea>
       </article>
-      <article></article>
-      <article></article>
+      <article>
+        <div class="frequences">
+          <textarea name="frequence1" id="frequence1" cols="11" rows="1" placeholder="Fréquence 1 (Hz)">697</textarea>
+          <textarea name="frequence2" id="frequence2" cols="11" rows="1" placeholder="Fréquence 2 (Hz)">1209</textarea>
+        </div>
+        <div class="preset">
+          <button id="preset1" onclick="setPreset(697, 1209)">1</button>
+          <button id="preset2" onclick="setPreset(697, 1336)">2</button>
+          <button id="preset3" onclick="setPreset(697, 1477)">3</button>
+          <button id="preset4" onclick="setPreset(770, 1209)">4</button>
+          <button id="preset5" onclick="setPreset(770, 1336)">5</button>
+        </div>
+      </article>
+      <article>
+        <div id="state"></div>
+      </article>
+
+      <div class="desc">
+        Gérer le son qui permet d'allumer et d'éteindre les relai si l'ordinateur est branché par jack.
+        Attention, pour s'allumer ou pour s'éteindre, le relai attend une pulsation et non pas un son continu.
+      </div>
+      <div class="desc">
+        Choisir les fréquences qui sont jouées durant les pulsations. Chaque relai s'allumera avec une combinaison
+        particulière de deux fréquences, il est possible d'utiliser les boutons qui sont des presets pour les fréquences
+        de chacune des piaules. Attention il faudra bien vérifier que le matériel est monté dans le bon sens de sorte
+        que tout ne soit pas inversé.
+      </div>
+      <div class="desc">
+        Voir l'état actuel du spot. Il s'agit de l'état de la lumière pour le client, il se peut qu'il y ait une
+        inversion entre le client et le serveur qui se produise, dès lors il faut y remédier. Il se peut (plus rarement)
+        qu'il y ait une inversion entre le client et le relai. En outre : l'état affiché par le client n'est pas
+        forcément le bon mais il faut veiller à ce que cela reste le cas.
+      </div>
     </section>
 
+    <section id="tutorial">
+
+    </section>
   </main>
 
-  <footer></footer>
-
-  <!-- Ecran de l'application principale -->
-  <div id="ClientScreen" style="visibility: hidden">
-    <div class="h3 mb-3 font-weight-normal" style="margin : 10px " id="message">en attente de Connexion</div>
-    <p class="mt-5 mb-3 h4 text-center" id="text"> </p>
-
-    <textarea style="display: block;" class="container" maxlength=200 rows=1 cols=50 placeholder="Fréquence :"
-      name="frequence" id="frequence1" required>697</textarea>
-
-    <textarea style="display: block;" class="container" maxlength=200 rows=1 cols=50 placeholder="Fréquence :"
-      name="frequence" id="frequence2" required>1209</textarea>
-
-    <button style="display: block;" onClick="resumeAudio()">Resume</button>
-    <button style="display: block;" onClick="suspendAudio()">Suspend</button>
-    <button style="display: block;" onClick="sendSoundPulse()">Pulse</button>
-
-    <textarea style="display: block;" class="container" maxlength=200 rows=1 cols=50
-      placeholder="Durée de la pulsation (ms) :" name="duration" id="duration" required>1000</textarea>
-  </div>
-
-  <p class="mt-5 mb-3 text-muted text-center" id="footerTxt">Lyc&eacutee Sainte Genevi&egraveve - 2019</p>
+  <footer>Lycée Privé Sainte Geneviève - 2022</footer>
 </body>
 
 
 <script>
-  var connScreen = document.getElementById('ConnexionScreen');
-  var clientScreen = document.getElementById('ClientScreen');
-  var msgLabel = document.getElementById('message');
-  var running = true;
-  var AreaPhoneId = document.getElementById('phoneId');
-  var AreaMasterAdress = document.getElementById('masterAdress');
-  var socket
-  var intervalID
-  var intervalTime = 3  //intervalle de temps (min) entre deux messages 'KeepAlive' pour maintenir la connexion
+  /* Rércupération des composants utiles */
+  const messageDisplay = document.getElementById('message')
+  const stateDisplay = document.getElementById('state')
+  const AreaPhoneId = document.getElementById('phoneId')
+  const AreaMasterAdress = document.getElementById('masterAdress')
 
+  /* Informations globales sur le client */
+  let running = true;
+  let socket
+
+  /* Information sur l'intervalle de KeepAlive */
+  let intervalID
+  let intervalTime = 3  //intervalle de temps (min) entre deux messages 'KeepAlive' pour maintenir la connexion
+
+  /* Creation du contexte qui permet de jouer l'audio */
   const context = new (window.AudioContext || window.webkitAudioContext)()
 
-  const dialTone = function (freq1, freq2) {
-    oscillator1 = context.createOscillator();
-    oscillator1.type = 0;
-    oscillator1.frequency.value = freq1;
-    gainNode = context.createGain ? context.createGain() : context.createGainNode();
-    oscillator1.connect(gainNode, 0, 0);
-    gainNode.connect(context.destination);
-    gainNode.gain.value = .1;
-    oscillator1.start ? oscillator1.start(0) : oscillator1.noteOn(0)
 
-    oscillator2 = context.createOscillator();
-    oscillator2.type = 0;
-    oscillator2.frequency.value = freq2;
-    gainNode = context.createGain ? context.createGain() : context.createGainNode();
-    oscillator2.connect(gainNode);
-    gainNode.connect(context.destination);
 
-    gainNode.gain.value = .1;
-    oscillator2.start ? oscillator2.start(0) : oscillator2.noteOn(0)
+  /**
+   * Crée des oscillateurs les connecte et joue les fréquences,
+   * renvoie la fonction à appeler pour arrêter les oscillateurs.
+   */
+  const play = (frequence1, frequence2) => {
+    /* Configuration des oscilatteurs */
+    const oscillator1 = context.createOscillator()
+    const oscillator2 = context.createOscillator()
+    oscillator1.frequency.value = frequence1
+    oscillator2.frequency.value = frequence2
 
-  };
+    /* Configuration du gains */
+    const gainNode = context.createGain()
+    gainNode.connect(context.destination)
+    gainNode.gain.value = .2
 
-  function stop() {
-    oscillator1.disconnect();
-    oscillator2.disconnect();
+    /* Connexion des oscillateurs */
+    oscillator1.connect(gainNode)
+    oscillator2.connect(gainNode)
+    oscillator1.start(0)
+    oscillator2.start(0)
+
+    /* Fonction à appeler pour arrêter les oscillateurs */
+    return function () {
+      oscillator1.disconnect()
+      oscillator2.disconnect()
+    }
   }
 
-  let resumeAudio = function () {
-    dialTone(document.getElementById("frequence1").value, frequence2 = document.getElementById("frequence2").value)
-  }
-  let suspendAudio = function () {
-    stop()
-  }
 
-  function sendSoundPulse() {
-    resumeAudio()
-    const pulseDuration = parseInt(document.getElementById("duration").value)
-    setTimeout(() => suspendAudio(), pulseDuration)
+
+  /**
+   * Permet de changer la couleur de la lampe qui affiche l'état de la lumière attendu par le client.
+   */
+  const switchState = () => {
+    stateDisplay.classList.toggle('on')
   }
 
-  let triggerMode = "play to light" || "play to resume play to suspend"
 
+
+  /**
+   * Envoie une pulsation en avec les données entrées par l'utilisateur.
+   */
+  const sendPulse = () => {
+    /* Récupération des données */
+    const frequence1 = document.getElementById('frequence1').value
+    const frequence2 = document.getElementById('frequence2').value
+    const duration = document.getElementById('duration').value
+
+    /* Change l'état de la lampe */
+    switchState()
+
+    /* Lancement du son et arrêt plannifié */
+    const stop = play(frequence1, frequence2)
+    setTimeout(stop, duration)
+  }
+
+
+
+  /**
+   * Permet de changer les fréquences des textareas en fonction du preset sélectionné en cliquant sur le bouton.
+   */
+  const setPreset = (frequence1, frequence2) => {
+    document.getElementById('frequence1').value = frequence1
+    document.getElementById('frequence2').value = frequence2
+  }
+
+
+
+  /**
+   * Connexion du client à l'aide de la socket et gestion des événéments reçus par la socket.
+   */
   function connect() {
+    /* Récupération des données entrées par l'utilisateur */
     var masterAdress = AreaMasterAdress.value
     var phoneId = AreaPhoneId.value
-    console.log(phoneId)
+    if (phoneId == '') return;  												//on s'assure que les champs sont bien remplis
 
-    if (phoneId == '') { return }  												//on s'assure que les champs sont bien remplis
-
-    connScreen.style.display = 'none';
-    clientScreen.style.visibility = 'visible';
-
+    /* Création de la socket et connexion au serveur, lancement du KeepAlive */
     socket = new WebSocket(masterAdress);
     socket.setKeepAlive = true;
     console.log('masterAdress = ' + masterAdress)
     intervalID = setInterval(function () { socket.send("KeepAlive"); }, (intervalTime * 60 * 1000));
 
-
+    /* Gestion des événements reçus par la socket */
     socket.onmessage = function (event) {
       const msg = event.data
       console.log("received :" + msg)
+      messageDisplay.innerHTML = msg
 
-      if (msg === "on" + phoneId && document.body.style.background == "black") {
-        document.body.style.background = 'white'
-        sendSoundPulse()
+      if (msg === "on" + phoneId && !stateDisplay.classList.contains('on')) {
+        sendPulse()
       }
-      else if (msg === "off" + phoneId && document.body.style.background == "white") {
-        document.body.style.background = 'black';
-        sendSoundPulse();
+      else if (msg === "off" + phoneId && stateDisplay.classList.contains('on')) {
+        sendPulse()
       }
       else if (msg === "end") {
         running = false;
         socket.close();
-        msgLabel.innerHTML = "Connexion ferm&eacutee";
         document.body.style.background = 'white';
       }
       else if (msg === "identifiant non reconnu") {
         running = false;
         socket.close();
-        msgLabel.innerHTML = "Identifiant non valide, Connexion ferm&eacutee";
         document.body.style.background = 'white';
-      }
-      else if (msg === "KeepAlive") {
-      }
-      else {
-        msgLabel.innerHTML = msg;
       }
 
       socket.onclose = function (event) {
         console.log("connexion closed")
       }
-
     }
 
+    /* Gestion de l'établissement de la connexion */
     socket.onopen = function () {
-      msgLabel.innerHTML = "connect&eacute !"
+      messageDisplay.innerHTML = "connect&eacute !"
       console.log("connecte ! : Socket Status: " + socket.readyState);
       socket.send("id =" + phoneId);										//on envoie notre id au server 
       console.log(phoneId)
 
       document.getElementById('connexion').classList.add('connected')
-      document.getElementsByTagName('h1')[0].innerHTML = "Connecté ! Numéro de piaule : " + phoneId + " adresse du serveur : " + masterAdress;
+      document.getElementById('connexion').innerHTML = "Connecté ! Numéro de piaule : " + phoneId + ", adresse du serveur : " + masterAdress;
     }
 
   }
