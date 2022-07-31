@@ -15,317 +15,7 @@
     rel="stylesheet">
 
   <!-- Le style du document -->
-  <style>
-    :root {
-      --pink-color: #f3abfd;
-      --blue-color: #8bc3f7;
-      --yellow-color: #f8ed93;
-      --green-color: #abfdb9;
-      --darkgrey-color: #2E2E2E;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    /* Header */
-    header {
-      width: 100%;
-      height: 100px;
-      background-color: var(--blue-color);
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    h1 {
-      font-size: 30px;
-      font-weight: 600;
-      font-style: italic;
-    }
-
-    /* Ecran de base connexion */
-    section#connexion {
-      width: 100%;
-      height: 300px;
-
-      box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.75) inset;
-      background-color: white;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      transition: all .2s ease-in;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 600;
-      font-style: italic;
-    }
-
-    h3 {
-      margin: 0;
-      margin-bottom: 15px;
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    button {
-      margin-top: 15px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: bold;
-    }
-
-    /* Ecran connecté */
-    section#connexion.connected {
-      height: 50px;
-      background-color: var(--blue-color);
-      box-shadow: none;
-    }
-
-    section#connexion.connected h3 {
-      display: none;
-    }
-
-    section#connexion.connected h3.message {
-      display: block;
-    }
-
-    section#connexion.connected textarea {
-      display: none;
-    }
-
-    section#connexion.connected button {
-      display: none;
-    }
-
-    /* Partie gestion des lumières une fois connecté */
-    section#gestion {
-      width: 100%;
-      height: 90vh;
-      background-color: var(--darkgrey-color);
-
-      display: grid;
-      grid-template-columns: 50px 1fr 1fr 1fr 50px;
-      grid-template-rows: 50px 3fr 1fr 1fr 50px;
-      align-items: center;
-      justify-items: center;
-
-      grid-template-areas:
-        ". . . . ."
-        ". article1 article2 article3 ."
-        ". title1 title2 title3 ."
-        ". desc1 desc2 desc3 ."
-        ". . . . .";
-    }
-
-    section#gestion h2 {
-      height: 100%;
-      width: 70%;
-      align-self: start;
-
-      background-color: white;
-      color: black;
-      text-align: center;
-      /* border-radius: 0 0 15px 15px; */
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-
-    section#gestion h2::before,
-    section#gestion h2::after {
-      content: "";
-      width: 30px;
-      height: 30px;
-      position: absolute;
-
-      border-radius: 5px;
-    }
-
-    section#gestion h2::before {
-      align-self: flex-start;
-    }
-
-    section#gestion h2::after {
-      align-self: flex-end;
-    }
-
-
-    section#gestion article {
-      height: 90%;
-      width: 70%;
-      align-self: end;
-
-      background-color: rgba(255, 255, 255, 0.5);
-      border-radius: 50px 50px 0 0;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    section#gestion .desc {
-      height: calc(80% - 10px);
-      width: calc(70% - 10px);
-      padding-top: 10px;
-      padding-inline: 5px;
-      align-self: start;
-
-      background-color: rgba(255, 255, 255, 0.5);
-      border-radius: 0 0 20px 20px;
-
-      font-size: 10px;
-      text-align: center;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
-
-    section#gestion h2:nth-child(1) {
-      grid-area: title1;
-    }
-
-    section#gestion h2:nth-child(1)::before {
-      transform: translate(40px, 15px) rotate(45deg);
-      background-color: var(--pink-color);
-    }
-
-    section#gestion h2:nth-child(1)::after {
-      transform: translate(-50px, -15px) rotate(45deg);
-      background-color: var(--yellow-color);
-    }
-
-    section#gestion h2:nth-child(2) {
-      grid-area: title2;
-    }
-
-    section#gestion h2:nth-child(2)::before {
-      transform: translate(35px, -5px) rotate(45deg);
-      background-color: var(--blue-color);
-    }
-
-    section#gestion h2:nth-child(2)::after {
-      transform: translate(-30px, 15px) rotate(45deg);
-      background-color: var(--green-color);
-    }
-
-    section#gestion h2:nth-child(3) {
-      grid-area: title3;
-    }
-
-    section#gestion h2:nth-child(3)::before {
-      transform: translate(28px, 10px) rotate(45deg);
-      background-color: var(--blue-color);
-    }
-
-    section#gestion h2:nth-child(3)::after {
-      transform: translate(-35px, -10px) rotate(45deg);
-      background-color: var(--pink-color);
-    }
-
-    section#gestion article:nth-child(4) {
-      grid-area: article1;
-    }
-
-    section#gestion article:nth-child(5) {
-      grid-area: article2;
-    }
-
-    section#gestion article:nth-child(6) {
-      grid-area: article3;
-    }
-
-    section#gestion .desc:nth-child(7) {
-      grid-area: desc1;
-    }
-
-    section#gestion .desc:nth-child(8) {
-      grid-area: desc2;
-    }
-
-    section#gestion .desc:nth-child(9) {
-      grid-area: desc3;
-    }
-
-    section#gestion button {
-      width: 100px;
-      height: 50px;
-    }
-
-    textarea#duration {
-      margin-top: 15px;
-    }
-
-    .frequences {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .frequences textarea {
-      margin: 7px;
-    }
-
-    .preset {
-      width: 80%;
-
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .preset button {
-      width: 33px !important;
-      height: 33px !important;
-      margin: 7px;
-    }
-
-    #state {
-      width: 150px;
-      height: 150px;
-
-      background-color: black;
-      border-radius: 20px;
-      box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.75);
-
-      transition: all .1s;
-    }
-
-    #state.on {
-      background-color: var(--yellow-color);
-      box-shadow: 0px 0px 20px -5px rgba(255, 255, 255, 0.75);
-    }
-
-    footer {
-      width: 100%;
-      height: 50px;
-      background-color: var(--darkgrey-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    section#tutorial {
-      height: 500px;
-      background-color: white;
-    }
-  </style>
-
+  <link rel="stylesheet" href="style.css">
 </head>
 
 
@@ -333,7 +23,22 @@
 
 <body>
   <header>
+    <div id="header-background" class="background">
+      <div class="window" style="grid-row: 2; grid-column: 2;"></div>
+      <div class="window" style="grid-row: 2; grid-column: 3;"></div>
+      <div class="window" style="grid-row: 2; grid-column: 4;"></div>
+      <div class="window" style="grid-row: 2; grid-column: 5;"></div>
+      <div class="window" style="grid-row: 2; grid-column: 6;"></div>
+      <div class="window" style="grid-row: 3; grid-column: 4;"></div>
+      <div class="window" style="grid-row: 3; grid-column: 5;"></div>
+      <div class="window" style="grid-row: 4; grid-column: 3;"></div>
+      <div class="window" style="grid-row: 4; grid-column: 4;"></div>
+      <div class="window" style="grid-row: 4; grid-column: 5;"></div>
+      <div class="window" style="grid-row: 4; grid-column: 6;"></div>
+      <div class="window" style="grid-row: 4; grid-column: 7;"></div>
+    </div>
     <h1>Coucher du Z</h1>
+    <h2>Journées d'accueil à Ginette</h2>
   </header>
 
   <main>
@@ -400,7 +105,270 @@
     </section>
 
     <section id="tutorial">
+      <h2>Section didactique</h2>
 
+      <article class="rooms">
+        <div class="rooms-grid">
+          <div class="room" style="grid-row: 2; grid-column: 2;">
+            <p class="room-number">344</p>
+            <p class="room-id">1</p>
+          </div>
+          <div class="room" style="grid-row: 2; grid-column: 3;">
+            <p class="room-number">342</p>
+            <p class="room-id">2</p>
+          </div>
+          <div class="room" style="grid-row: 2; grid-column: 4;">
+            <p class="room-number">340</p>
+            <p class="room-id">3</p>
+          </div>
+          <div class="room" style="grid-row: 2; grid-column: 5;">
+            <p class="room-number">338</p>
+            <p class="room-id">4</p>
+          </div>
+          <div class="room" style="grid-row: 2; grid-column: 6;">
+            <p class="room-number">336</p>
+            <p class="room-id">5</p>
+          </div>
+          <div class="room disabled" style="grid-row: 2; grid-column: 7;">
+            <p class="room-number">334</p>
+            <p class="room-id">/</p>
+          </div>
+          <div class="room disabled" style="grid-row: 3; grid-column: 2;">
+            <p class="room-number">244</p>
+            <p class="room-id">/</p>
+          </div>
+          <div class="room disabled" style="grid-row: 3; grid-column: 3;">
+            <p class="room-number">242</p>
+            <p class="room-id">/</p>
+          </div>
+          <div class="room" style="grid-row: 3; grid-column: 4;">
+            <p class="room-number">240</p>
+            <p class="room-id">1</p>
+          </div>
+          <div class="room" style="grid-row: 3; grid-column: 5;">
+            <p class="room-number">238</p>
+            <p class="room-id">2</p>
+          </div>
+          <div class="room disabled" style="grid-row: 3; grid-column: 6;">
+            <p class="room-number">236</p>
+            <p class="room-id">/</p>
+          </div>
+          <div class="room disabled" style="grid-row: 3; grid-column: 7;">
+            <p class="room-number">234</p>
+            <p class="room-id">/</p>
+          </div>
+          <div class="room disabled" style="grid-row: 4; grid-column: 2;">
+            <p class="room-number">144</p>
+            <p class="room-id">/</p>
+          </div>
+          <div class="room" style="grid-row: 4; grid-column: 3;">
+            <p class="room-number">142</p>
+            <p class="room-id">1</p>
+          </div>
+          <div class="room" style="grid-row: 4; grid-column: 4;">
+            <p class="room-number">140</p>
+            <p class="room-id">2</p>
+          </div>
+          <div class="room" style="grid-row: 4; grid-column: 5;">
+            <p class="room-number">138</p>
+            <p class="room-id">3</p>
+          </div>
+          <div class="room" style="grid-row: 4; grid-column: 6;">
+            <p class="room-number">136</p>
+            <p class="room-id">4</p>
+          </div>
+          <div class="room" style="grid-row: 4; grid-column: 7;">
+            <p class="room-number">134</p>
+            <p class="room-id">5</p>
+          </div>
+        </div>
+        <div class="right-side">
+          <h2>Numéros de piaules</h2>
+          <p>Quelques renseignements pratiques sur les numéros de piaules et de l'aide pour les branchements à
+            effectuer.</p>
+          <p>Attention, il faut bien réfléchir lors des branchements au sens de la façade et des piaules, si les piaules
+            sont branchées toutes dans le mauvais sens, les séquences ne se dérouleront pas correctement.</p>
+          <p>Il faut déjà vérifier le montage et le sens d'allumage lors de la répétition la veille du coucher.</p>
+          <p>Si les lampes sont "montées" dans le mauvais ordre, inutile de tout débrancher, il suffit de changer
+            l'ordre des piaules en choisissant les presets dans l'autre sens pour les fréquences qui permettent
+            d'allumer le relai.</p>
+        </div>
+      </article>
+
+      <article class="musics">
+        <div class="left-side">
+          <h2>Quelques musiques</h2>
+          <p>Ces quelques musiques peuvent vous être utiles pour la cérémonie du Coucher du Z. Il s'agit de quelques
+            musiques ou extraits de musiques épiques pour créer une ambiance solennel.</p>
+          <p>Des musiques peuvent être ajoutées à votre goût. Il faut bien vérifier qu'elles restent épiques et peu
+            rythmées, assez calmes en général. Elles donnent envie de se battre pour certaines.</p>
+          <p>En règle général les musiques sont listées par les CD Accueil mais sont gérées par les CD Sono G, libre à
+            eux de passer les musiques qu'ils veulent tant qu'elles restent dans le thème.</p>
+        </div>
+        <div class="right-side">
+          <div class="music">
+            <a href="https://www.youtube.com/watch?v=uzb81OsTdrU" target="_blank"><strong>Ecce Homo</strong></a>
+            C'est LA musique des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/8Vj9znomynQ" target="_blank"><strong>Christophe Colomb
+              </strong></a>
+            Procession de la Strass
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/I34-31nG9Lo" target="_blank"><strong>The
+                Largest Black Hole (Soundtrack)
+              </strong></a>
+            Musique EPIQUE
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/U76HoYWMBI0" target="_blank"><strong>Largest Star (Soundtrack)
+              </strong></a>
+            Musique EPIQUE
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/7nPMZjTZuO0" target="_blank"><strong>NASA
+                We Go Together
+              </strong></a>
+            Musique EPIQUE
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/PZBZ7lSXYeQ" target="_blank"><strong>NASA
+                How we are going to the moon
+              </strong></a>
+            Musique EPIQUE
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/v9NQYKv2rTg" target="_blank"><strong>Squid Game Pink Soldiers
+              </strong></a>
+            Musique EPIQUE
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/Rqz_JyAUZyg" target="_blank"><strong>Doctor Who 11th Doctor
+              </strong></a>
+            Musique EPIQUE
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/giIehoMVPb4" target="_blank"><strong>Stranger Things Soldiers
+              </strong></a>
+            Musique EPIQUE
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/fJmzY8CFSG0" target="_blank"><strong>Stranger Things Separate Ways
+              </strong></a>
+            Musique EPIQUE (Attention paroles)
+          </div>
+          <div class="music">
+            <a href="https://www.youtube.com/watch?v=3sE1rKAUNtg" target="_blank"><strong>Arrival to earth
+                (5'27)</strong></a>
+            Musique épique
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/gSJx7STd6j4" target="_blank"><strong>Battle of Hogwarts
+              </strong></a>
+            Musique épique
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/c56t7upa8Bk" target="_blank"><strong>Time
+              </strong></a>
+            Musique épique
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/bNoWHflgLRs" target="_blank"><strong>Requiem for a dream
+              </strong></a>
+            Musique épique
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/u5FyRZbqfeM" target="_blank"><strong>Chevalier de Sangreal
+              </strong></a>
+            Musique épique
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/GXFSK0ogeg4" target="_blank"><strong>O Fortuna
+              </strong></a>
+            Musique épique
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/XPiWUq5DUjE" target="_blank"><strong>Invincible
+              </strong></a>
+            Musique épique
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/iGx5a1ifSDs" target="_blank"><strong>The Dark Knight
+              </strong></a>
+            Musique épique
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/eb2zuegwcwk" target="_blank"><strong>The Force Suite
+              </strong></a>
+            Musique épique
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/-bzWSJG93P8" target="_blank"><strong>Imperial March
+              </strong></a>
+            Présentation des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/H7qOJrT_lUg" target="_blank"><strong>The Last Stand
+              </strong></a>
+            Présentation des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/ASj81daun5Q" target="_blank"><strong>Protectors of the earth
+              </strong></a>
+            Présentation des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/OzLhXesNkCI" target="_blank"><strong>Dream is collapsing
+              </strong></a>
+            Présentation des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/YEH98_Ha2aA" target="_blank"><strong>Exogenesis symphony
+              </strong></a>
+            Présentation des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/VKzWLUQizz8" target="_blank"><strong>Genesis
+              </strong></a>
+            Présentation des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/ST2H8FWDvEA" target="_blank"><strong>In a heartbeat
+              </strong></a>
+            Présentation des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/bbS-Zhz31CA" target="_blank"><strong>Lux Aeterna
+              </strong></a>
+            Présentation des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/btPJPFnesV4" target="_blank"><strong>Eye of the tiger
+              </strong></a>
+            Présentation des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/-HHlHLBxqnc" target="_blank"><strong>The Avengers
+              </strong></a>
+            Présentation des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/qhGGXSwfouw" target="_blank"><strong>N'To Carousel
+              </strong></a>
+            Présentation des Z
+          </div>
+          <div class="music">
+            <a href="https://youtu.be/I6mqszCTqus" target="_blank"><strong>N'To The Hound
+              </strong></a>
+            Présentation des Z
+          </div>
+        </div>
+      </article>
+
+      <article class="installation"></article>
+
+      <article class="credits"></article>
     </section>
   </main>
 
@@ -412,6 +380,7 @@
   /* Rércupération des composants utiles */
   const messageDisplay = document.getElementById('message')
   const stateDisplay = document.getElementById('state')
+  const headerBackground = document.getElementById('header-background')
   const AreaPhoneId = document.getElementById('phoneId')
   const AreaMasterAdress = document.getElementById('masterAdress')
 
@@ -426,6 +395,27 @@
   /* Creation du contexte qui permet de jouer l'audio */
   const context = new (window.AudioContext || window.webkitAudioContext)()
 
+
+
+  /**
+   * Lance l'animation du Z dans le background du header, comme les lumières lors de la cérémonie
+   */
+  const animateHeaderBackground = () => {
+    const windowElements = document.getElementsByClassName('window')
+    const colors = ['var(--pink-color)', 'var(--yellow-color)', 'var(--green-color)', 'var(--blue-color)', 'var(--red-color)', 'var(--turquoise-color)', 'var(--purple-color)']
+
+    Array.from(windowElements).forEach((element, index) => {
+      setTimeout(() => {
+        element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]
+        setInterval(() => {
+          element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]
+        }, 5000)
+      }, index * 200)
+    })
+  }
+
+  /* Run the animation on script load */
+  animateHeaderBackground()
 
 
   /**
@@ -548,7 +538,7 @@
       console.log(phoneId)
 
       document.getElementById('connexion').classList.add('connected')
-      document.getElementById('connexion').innerHTML = "Connecté ! Numéro de piaule : " + phoneId + ", adresse du serveur : " + masterAdress;
+      document.getElementById('connexion').innerHTML = "Connexion réussie. Numéro de piaule : " + phoneId + ". Adresse du serveur : " + masterAdress + ".";
     }
 
   }

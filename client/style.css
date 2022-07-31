@@ -1,0 +1,523 @@
+:root {
+    --pink-color: #f3abfd;
+    --blue-color: #8bc3f7;
+    --yellow-color: #f8ed93;
+    --green-color: #abfdb9;
+
+    --red-color: #f78989;
+    --turquoise-color: #95ffee;
+    --purple-color: #ccabfd;
+
+    --darkgrey-color: #2E2E2E;
+    --lightgrey-color: #cfcece;
+
+    --gold-texture-gradient: 105deg, #FFE572, #A29146;
+    --silver-texture-gradient: 105deg, #D4EAEA, #84B0B0;
+    --bronze-texture-gradient: 105deg, #DFAC6D, #715839;
+    --iron-texture-gradient: 105deg, #E8E8E8, #AEAEAE;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Header */
+header {
+    width: 100%;
+    height: 75vh;
+    /* background-color: var(--darkgrey-color); */
+    background: transparent;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0px 0px 6px #000000;
+    /* font-style: italic; */
+}
+
+header h2 {
+    margin-top: -30px;
+    color: var(--lightgrey-color);
+    text-shadow: 0px 0px 8px #000000;
+}
+
+header .background {
+    height: 75vh;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+
+    background-color: var(--darkgrey-color);
+
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: 25vw repeat(6, 1fr) 25vw;
+    grid-template-rows: 20% repeat(3, 1fr) 20%;
+}
+
+header .window {
+    height: 75%;
+    width: 40%;
+    opacity: 1;
+
+    border-radius: 2px;
+    background-color: var(--darkgrey-color);
+    transition: background-color .2s;
+}
+
+/* Ecran de base connexion */
+section#connexion {
+    width: 100%;
+    height: 25vh;
+
+    box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.75) inset;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition: all .2s ease-in;
+}
+
+h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+h3 {
+    margin: 0;
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+button {
+    margin-top: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+/* Ecran connecté */
+section#connexion.connected {
+    height: 50px;
+    background-color: var(--blue-color);
+    box-shadow: none;
+}
+
+section#connexion.connected h3 {
+    display: none;
+}
+
+section#connexion.connected h3.message {
+    display: block;
+}
+
+section#connexion.connected textarea {
+    display: none;
+}
+
+section#connexion.connected button {
+    display: none;
+}
+
+/* Partie gestion des lumières une fois connecté */
+section#gestion {
+    width: 100%;
+    height: 90vh;
+    background-color: var(--darkgrey-color);
+
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr 1fr 50px;
+    grid-template-rows: 50px 3fr 1fr 1fr 50px;
+    align-items: center;
+    justify-items: center;
+
+    grid-template-areas:
+        ". . . . ."
+        ". article1 article2 article3 ."
+        ". title1 title2 title3 ."
+        ". desc1 desc2 desc3 ."
+        ". . . . .";
+}
+
+section#gestion h2 {
+    height: 100%;
+    width: 70%;
+    align-self: start;
+
+    background-color: white;
+    color: black;
+    text-align: center;
+    /* border-radius: 0 0 15px 15px; */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+section#gestion h2::before,
+section#gestion h2::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    position: absolute;
+
+    border-radius: 5px;
+}
+
+section#gestion h2::before {
+    align-self: flex-start;
+}
+
+section#gestion h2::after {
+    align-self: flex-end;
+}
+
+
+section#gestion article {
+    height: 90%;
+    width: 70%;
+    align-self: end;
+
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50px 50px 0 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+section#gestion .desc {
+    height: calc(80% - 10px);
+    width: calc(70% - 10px);
+    padding-top: 10px;
+    padding-inline: 5px;
+    align-self: start;
+
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 0 0 20px 20px;
+
+    font-size: 10px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+section#gestion h2:nth-child(1) {
+    grid-area: title1;
+}
+
+section#gestion h2:nth-child(1)::before {
+    transform: translate(40px, 15px) rotate(45deg);
+    background-color: var(--pink-color);
+}
+
+section#gestion h2:nth-child(1)::after {
+    transform: translate(-50px, -15px) rotate(45deg);
+    background-color: var(--yellow-color);
+}
+
+section#gestion h2:nth-child(2) {
+    grid-area: title2;
+}
+
+section#gestion h2:nth-child(2)::before {
+    transform: translate(35px, -5px) rotate(45deg);
+    background-color: var(--blue-color);
+}
+
+section#gestion h2:nth-child(2)::after {
+    transform: translate(-30px, 15px) rotate(45deg);
+    background-color: var(--green-color);
+}
+
+section#gestion h2:nth-child(3) {
+    grid-area: title3;
+}
+
+section#gestion h2:nth-child(3)::before {
+    transform: translate(28px, 10px) rotate(45deg);
+    background-color: var(--blue-color);
+}
+
+section#gestion h2:nth-child(3)::after {
+    transform: translate(-35px, -10px) rotate(45deg);
+    background-color: var(--pink-color);
+}
+
+section#gestion article:nth-child(4) {
+    grid-area: article1;
+    background: linear-gradient(var(--bronze-texture-gradient));
+}
+
+section#gestion article:nth-child(5) {
+    grid-area: article2;
+    background: linear-gradient(var(--gold-texture-gradient));
+}
+
+section#gestion article:nth-child(6) {
+    grid-area: article3;
+    background: linear-gradient(var(--iron-texture-gradient));
+}
+
+section#gestion .desc:nth-child(7) {
+    grid-area: desc1;
+}
+
+section#gestion .desc:nth-child(8) {
+    grid-area: desc2;
+}
+
+section#gestion .desc:nth-child(9) {
+    grid-area: desc3;
+}
+
+section#gestion button {
+    width: 100px;
+    height: 50px;
+}
+
+textarea#duration {
+    margin-top: 15px;
+}
+
+.frequences {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.frequences textarea {
+    margin: 7px;
+}
+
+.preset {
+    width: 80%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.preset button {
+    width: 33px !important;
+    height: 33px !important;
+    margin: 7px;
+}
+
+#state {
+    width: 150px;
+    height: 150px;
+
+    background-color: black;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.75);
+
+    transition: all .1s;
+}
+
+#state.on {
+    background-color: var(--yellow-color);
+    box-shadow: 0px 0px 20px -5px rgba(255, 255, 255, 0.75);
+}
+
+
+
+section#tutorial {
+    position: relative;
+
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+article {
+    height: 600px;
+    width: 90%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+
+    border-bottom: 1px solid var(--darkgrey-color);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+article.rooms {
+    padding-top: 0;
+}
+
+section#tutorial>h2 {
+    width: 100%;
+    height: 75px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    top: 0;
+    position: sticky;
+
+    background-color: white;
+    font-size: 30px;
+    font-style: normal;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section#tutorial>h2::before,
+section#tutorial>h2::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    position: absolute;
+
+    border-radius: 5px;
+}
+
+section#tutorial h2::before {
+    transform: translate(200px) rotate(45deg);
+    background-color: var(--purple-color);
+}
+
+section#tutorial h2::after {
+    transform: translate(-210px) rotate(45deg);
+    background-color: var(--red-color);
+}
+
+article.rooms .rooms-grid {
+    height: 600px;
+    width: 55%;
+
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 0 repeat(6, 1fr) 0;
+    grid-template-rows: 10% repeat(3, 1fr) 20%;
+}
+
+article.rooms .room {
+    height: 100px;
+    width: 60px;
+
+    background-color: var(--lightgrey-color);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.room .room-number {
+    font-weight: bold;
+}
+
+.room.disabled {
+    background-color: white !important;
+}
+
+article.rooms .right-side {
+    height: 600px;
+    width: 25%;
+    border-left: 1px solid var(--darkgrey-color);
+}
+
+article h2 {
+    margin-top: 15px;
+    font-size: 25px;
+}
+
+article.rooms h2 {
+    margin-left: 30px;
+}
+
+article.rooms .right-side p {
+    margin-left: 30px;
+}
+
+article.musics .left-side {
+    height: 600px;
+    width: 30%;
+
+    text-align: right;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+article.musics .left-side h2 {
+    margin-right: 30px;
+}
+
+article.musics .left-side p {
+    margin-right: 30px;
+}
+
+article.musics .right-side {
+    height: 600px;
+    width: 60%;
+
+    border-left: 1px var(--darkgrey-color) solid;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+article.musics .right-side .music {
+    height: 10%;
+    width: 21%;
+    margin: 2px 10px;
+
+    font-size: 13px;
+    text-align: center;
+
+    border-right: 1px dotted var(--lightgrey-color);
+    border-bottom: 1px dotted var(--lightgrey-color);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.music a {
+    color: var(--blue-color);
+}
+
+.music a:visited {
+    color: var(--purple-color);
+}
+
+footer {
+    width: 100%;
+    height: 50px;
+    background-color: var(--darkgrey-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
