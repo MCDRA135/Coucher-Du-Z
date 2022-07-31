@@ -1,3 +1,10 @@
+# Coucher du Z (CDZ)
+## Application Lumières
+
+### Etapes à suivre pour installer l'application :
+
+Les étapes sont détaillées sur le site internet.
+
 1. Installer python (la dernière version, ou 3.10.) dans l'installation, il faut bien cocher ajouter au PATH et installer tk.
 2. Installer les modules nécessaires à l'aide de pip qui a été installé par python, pour le faire :
 	2.1. Ouvrir une console (windows + R, écrire cmd) puis écrire "pip install numpy", attendre que l'installation se fasse
