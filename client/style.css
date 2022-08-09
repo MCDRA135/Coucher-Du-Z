@@ -15,11 +15,18 @@
     --silver-texture-gradient: 105deg, #D4EAEA, #84B0B0;
     --bronze-texture-gradient: 105deg, #DFAC6D, #715839;
     --iron-texture-gradient: 105deg, #E8E8E8, #AEAEAE;
+
+    --paragraph-font-size: 1.03vw;
+    --small-font-size: .65vw;
 }
 
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
+}
+
+p {
+    font-size: var(--paragraph-font-size);
 }
 
 /* Header */
@@ -136,12 +143,12 @@ section#connexion.connected button {
 /* Partie gestion des lumières une fois connecté */
 section#gestion {
     width: 100%;
-    height: 90vh;
+    height: 47vw;
     background-color: var(--darkgrey-color);
 
     display: grid;
-    grid-template-columns: 50px 1fr 1fr 1fr 50px;
-    grid-template-rows: 50px 3fr 1fr 1fr 50px;
+    grid-template-columns: 3vw 1fr 1fr 1fr 3vw;
+    grid-template-rows: 3vw 3fr 1fr 1fr 3vw;
     align-items: center;
     justify-items: center;
 
@@ -172,11 +179,11 @@ section#gestion h2 {
 section#gestion h2::before,
 section#gestion h2::after {
     content: "";
-    width: 30px;
-    height: 30px;
+    width: 2vw;
+    height: 2vw;
     position: absolute;
 
-    border-radius: 5px;
+    border-radius: .5vw;
 }
 
 section#gestion h2::before {
@@ -194,7 +201,7 @@ section#gestion article {
     align-self: end;
 
     background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50px 50px 0 0;
+    border-radius: 3vw 3vw 0 0;
 
     display: flex;
     flex-direction: column;
@@ -203,16 +210,16 @@ section#gestion article {
 }
 
 section#gestion .desc {
-    height: calc(80% - 10px);
-    width: calc(70% - 10px);
-    padding-top: 10px;
-    padding-inline: 5px;
+    height: calc(80% - 1vw);
+    width: calc(70% - 1vw);
+    padding-top: .7vw;
+    padding-inline: .5vw;
     align-self: start;
 
     background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 2vw 2vw;
 
-    font-size: 10px;
+    font-size: var(--small-font-size);
     text-align: center;
 
     display: flex;
@@ -226,12 +233,12 @@ section#gestion h2:nth-child(1) {
 }
 
 section#gestion h2:nth-child(1)::before {
-    transform: translate(40px, 15px) rotate(45deg);
+    transform: translate(2vw, 1vw) rotate(45deg);
     background-color: var(--pink-color);
 }
 
 section#gestion h2:nth-child(1)::after {
-    transform: translate(-50px, -15px) rotate(45deg);
+    transform: translate(-2vw, -1vw) rotate(45deg);
     background-color: var(--yellow-color);
 }
 
@@ -240,12 +247,12 @@ section#gestion h2:nth-child(2) {
 }
 
 section#gestion h2:nth-child(2)::before {
-    transform: translate(35px, -5px) rotate(45deg);
+    transform: translate(1.5vw, -.5vw) rotate(45deg);
     background-color: var(--blue-color);
 }
 
 section#gestion h2:nth-child(2)::after {
-    transform: translate(-30px, 15px) rotate(45deg);
+    transform: translate(-1.5vw, 1vw) rotate(45deg);
     background-color: var(--green-color);
 }
 
@@ -254,12 +261,12 @@ section#gestion h2:nth-child(3) {
 }
 
 section#gestion h2:nth-child(3)::before {
-    transform: translate(28px, 10px) rotate(45deg);
+    transform: translate(2vw, 1vw) rotate(45deg);
     background-color: var(--blue-color);
 }
 
 section#gestion h2:nth-child(3)::after {
-    transform: translate(-35px, -10px) rotate(45deg);
+    transform: translate(-2.5vw, -1vw) rotate(45deg);
     background-color: var(--pink-color);
 }
 
@@ -291,12 +298,12 @@ section#gestion .desc:nth-child(9) {
 }
 
 section#gestion button {
-    width: 100px;
-    height: 50px;
+    width: 7vw;
+    height: 3vw;
 }
 
 textarea#duration {
-    margin-top: 15px;
+    margin-top: 1vw;
 }
 
 .frequences {
@@ -307,7 +314,7 @@ textarea#duration {
 }
 
 .frequences textarea {
-    margin: 7px;
+    margin: .5vw;
 }
 
 .preset {
@@ -321,25 +328,25 @@ textarea#duration {
 }
 
 .preset button {
-    width: 33px !important;
-    height: 33px !important;
-    margin: 7px;
+    width: 2.5vw !important;
+    height: 2.5vw !important;
+    margin: .3vw;
 }
 
 #state {
-    width: 150px;
-    height: 150px;
+    width: 11vw;
+    height: 11vw;
 
     background-color: black;
-    border-radius: 20px;
-    box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.75);
+    border-radius: 1.5vw;
+    box-shadow: 0px 0px 1vw -.5vw rgba(0, 0, 0, 0.75);
 
     transition: all .1s;
 }
 
 #state.on {
     background-color: var(--yellow-color);
-    box-shadow: 0px 0px 20px -5px rgba(255, 255, 255, 0.75);
+    box-shadow: 0px 0px 1vw -1vw rgba(255, 255, 255, 0.75);
 }
 
 
@@ -355,10 +362,10 @@ section#tutorial {
 }
 
 section#tutorial article {
-    height: 600px;
+    height: 45vw;
     width: 90%;
-    padding-bottom: 50px;
-    padding-top: 50px;
+    padding-bottom: 4vw;
+    padding-top: 4vw;
 
     border-bottom: 1px solid var(--darkgrey-color);
 
@@ -374,14 +381,14 @@ article.rooms {
 
 section#tutorial>h2 {
     width: 100%;
-    height: 75px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    height: 6vw;
+    margin-top: 4vw;
+    margin-bottom: 4vw;
     top: 0;
     position: sticky;
 
     background-color: white;
-    font-size: 30px;
+    font-size: 2vw;
     font-style: normal;
 
     display: flex;
@@ -392,25 +399,25 @@ section#tutorial>h2 {
 section#tutorial>h2::before,
 section#tutorial>h2::after {
     content: "";
-    width: 30px;
-    height: 30px;
+    width: 1.5vw;
+    height: 1.5vw;
     position: absolute;
 
-    border-radius: 5px;
+    border-radius: .5vw;
 }
 
 section#tutorial h2::before {
-    transform: translate(200px) rotate(45deg);
+    transform: translate(13.3vw) rotate(45deg);
     background-color: var(--purple-color);
 }
 
 section#tutorial h2::after {
-    transform: translate(-210px) rotate(45deg);
+    transform: translate(-13.5vw) rotate(45deg);
     background-color: var(--red-color);
 }
 
 article.rooms .rooms-grid {
-    height: 600px;
+    height: 40vw;
     width: 55%;
 
     display: grid;
@@ -420,8 +427,8 @@ article.rooms .rooms-grid {
 }
 
 article.rooms .room {
-    height: 100px;
-    width: 60px;
+    height: 7vw;
+    width: 4vw;
 
     background-color: var(--lightgrey-color);
 
@@ -440,25 +447,25 @@ article.rooms .room {
 }
 
 article.rooms .right-side {
-    height: 600px;
+    height: 40vw;
     width: 25%;
     border-left: 1px solid var(--darkgrey-color);
 }
 
 section#tutorial article h2 {
-    margin-top: 15px;
-    font-size: 25px;
+    margin-top: 1vw;
+    font-size: 1.6vw;
 }
 
 article.rooms h2,
 article.installation h2,
 article.rooms .right-side p,
 article.installation .right-side p {
-    margin-left: 30px;
+    margin-left: 2vw;
 }
 
 article.musics .left-side {
-    height: 600px;
+    height: 40vw;
     width: 30%;
 
     text-align: right;
@@ -469,15 +476,15 @@ article.musics .left-side {
 }
 
 article.musics .left-side h2 {
-    margin-right: 30px;
+    margin-right: 2vw;
 }
 
 article.musics .left-side p {
-    margin-right: 30px;
+    margin-right: 2vw;
 }
 
 article.musics .right-side {
-    height: 600px;
+    height: 45vw;
     width: 60%;
 
     border-left: 1px var(--darkgrey-color) solid;
@@ -490,9 +497,9 @@ article.musics .right-side {
 article.musics .right-side .music {
     height: 10%;
     width: 21%;
-    margin: 2px 10px;
+    margin: 2px 1vw;
 
-    font-size: 13px;
+    font-size: .8vw;
     text-align: center;
 
     border-right: 1px dotted var(--lightgrey-color);
@@ -513,7 +520,7 @@ article.musics .right-side .music {
 }
 
 article.installation .steps {
-    height: 600px;
+    height: 40vw;
     width: 55%;
 
     display: flex;
@@ -523,22 +530,23 @@ article.installation .steps {
 
 article.installation .step {
     width: 80%;
+    font-size: var(--paragraph-font-size);
 }
 
 article.installation .right-side {
-    height: 600px;
+    height: 40vw;
     width: 25%;
     border-left: 1px solid var(--darkgrey-color);
 }
 
 article.credits {
-    height: 700px !important;
+    height: 45vw !important;
 }
 
 article.credits .left-side,
 article.credits .right-side,
 article.credits .middle {
-    height: 700px;
+    height: 45vw;
     width: 30%;
     text-align: center;
 
@@ -550,18 +558,18 @@ article.credits .middle {
 }
 
 article.credits .participant {
-    height: 75px;
-    width: 175px;
+    height: 5vw;
+    width: 11.5vw;
     margin: 5px;
 
     background-color: var(--darkgrey-color);
-    box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 2vw -.5vw rgba(0, 0, 0, 0.75);
     border-radius: 5px;
 
     text-align: center;
     font-weight: bold;
     color: white;
-    font-size: 12px;
+    font-size: .8vw;
 
     display: flex;
     flex-direction: column;
@@ -574,7 +582,7 @@ article.credits .left-side {
 }
 
 article.credits .left-side h2 {
-    margin-bottom: 16px;
+    margin-bottom: 1.5vw;
 }
 
 article.credits .right-side {
@@ -592,8 +600,8 @@ article.credits .right-side p {
 }
 
 .mail {
-    height: 100px;
-    width: 300px;
+    height: 6vw;
+    width: 18vw;
 
     border-radius: 10px;
     background-color: var(--darkgrey-color);
@@ -611,7 +619,7 @@ article.credits .right-side p {
 
 footer {
     width: 100%;
-    height: 50px;
+    height: 4vw;
 
     background-color: var(--darkgrey-color);
     color: white;
