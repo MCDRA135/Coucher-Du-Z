@@ -23,7 +23,8 @@ import signal
 
 #Fonction globales :
 
-conf.get_default().auth_token = "287KWQBQVOLvlNFDpJNgmYdDGlv_7HnovYhWfUVUViTPEmfnQ"
+conf.get_default().ngrok_version = "v2"
+conf.get_default().auth_token = '2OhNpvcigbHLXSWpKExHqxr90uk_5baFmnqzUqTsD7ewpByTn' # "287KWQBQVOLvlNFDpJNgmYdDGlv_7HnovYhWfUVUViTPEmfnQ"
 conf.get_default().region = "eu"
 
 def ChooseEvent():
@@ -635,7 +636,7 @@ def OnClosing():
 
 def CreateNewTunnel(interface, tunnel):
     """crée un nouveau tnnel tcp avec ngrok et update les infos, renvoie true si le tunnel fonctionne"""
-    URL = ngrok.connect(port=PORT, proto='tcp')
+    URL = ngrok.connect(addr=PORT, proto='tcp') # CDZ 2023: changé cette ligne, apparemment "port=PORT" ne permettait pas de passer le port à la config du tunnel (changement de version entre-temps)
     tunnel = ngrok.get_tunnels()[0]
     print(tunnel)
     print("tunnel tcp crée : "+tunnel.__str__())
@@ -685,7 +686,7 @@ def CloseApp(signal,frame):
 
 
 
-#Tout d'avord on demande à l'utilisateur de choisir une cérémonie parmi celles disponibles
+#Tout d'abord on demande à l'utilisateur de choisir une cérémonie parmi celles disponibles
 
 
 eventName = ChooseEvent()
@@ -717,7 +718,7 @@ tunnelOpen = False
 sequenceList = GetSequenceList(eventName)
 
 # on lance le serveur
-PORT = 80
+PORT = 8080
 
 # * CHANGEMENT EFFECTUE A CETTE LIGNE
 server = WebsocketServer(host='0.0.0.0', port=PORT)      #attention si l'on ne spécifie pas 'host' le server sera lancé en local seulement !
@@ -749,7 +750,7 @@ canvasTitleFont = font.Font(family='impact', size=18)
 interface = Interface(fenetre, infos)
 
 
-# Ouverture d'un tunnel tcp avec ngrok (https://ngrok.com/), cela permet d'accéder au serveur quelque soit la connexion Internet
+# Ouverture d'un tunnel tcp avec ngrok (https://ngrok.com/), cela permet d'accéder au serveur quelle que soit la connexion Internet
 #  et cela sans aucun port forwarding ! en revanche le numéro de port change à chaque fois, il faut le communiquer pour permettre aux téléphones de se connecter
 
 print('\nlancement de ngrok ... \n')
