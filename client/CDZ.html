@@ -47,8 +47,16 @@
       <h2>Connexion</h2>
       <h3>au serveur python</h3>
       <h3 id="message"></h3>
-      <textarea maxlength=200 rows=1 cols=50 placeholder="Numéro de piaule (ex 340)" name="phoneId" id="phoneId"
-        required></textarea>
+
+      <p>Numéros des piaules associées à chaque sortie :</p>
+      <textarea maxlength=200 rows=1 cols=10 placeholder="1" name="num1" id="num1" required></textarea>
+      <textarea maxlength=200 rows=1 cols=10 placeholder="2" name="num2" id="num2" required></textarea>
+      <textarea maxlength=200 rows=1 cols=10 placeholder="3" name="num3" id="num3" required></textarea>
+      <textarea maxlength=200 rows=1 cols=10 placeholder="4" name="num4" id="num4" required></textarea>
+      <textarea maxlength=200 rows=1 cols=10 placeholder="5" name="num5" id="num5" required></textarea>
+      <textarea maxlength=200 rows=1 cols=10 placeholder="6" name="num6" id="num6" required></textarea>
+      
+      <p>Adresse ngrok du serveur :</p>
       <textarea maxlength=200 rows=1 cols=50 placeholder="Adresse ngrok du serveur" name="masterAdress"
         id="masterAdress" required>ws://0.tcp.eu.ngrok.io:</textarea>
       <button id="submitButton" onclick='connect()'>CONFIRMER</button>
@@ -75,15 +83,21 @@
           <textarea name="frequence2" id="frequence2" cols="11" rows="1" placeholder="Fréquence 2 (Hz)">1209</textarea>
         </div>
         <div class="preset">
-          <button id="preset1" onclick="setPreset(697, 1209)">1</button>
-          <button id="preset2" onclick="setPreset(697, 1336)">2</button>
-          <button id="preset3" onclick="setPreset(697, 1477)">3</button>
-          <button id="preset4" onclick="setPreset(770, 1209)">4</button>
-          <button id="preset5" onclick="setPreset(770, 1336)">5</button>
+          <button id="preset1" onclick="switchSpot(1)">1</button>
+          <button id="preset2" onclick="switchSpot(2)">2</button>
+          <button id="preset3" onclick="switchSpot(3)">3</button>
+          <button id="preset4" onclick="switchSpot(4)">4</button>
+          <button id="preset5" onclick="switchSpot(5)">5</button>
+          <button id="preset6" onclick="switchSpot(6)">6</button>
         </div>
       </article>
-      <article>
-        <div id="state"></div>
+      <article class="stateList">
+        <div id="state1" class="state"></div>
+        <div id="state2" class="state"></div>
+        <div id="state3" class="state"></div>
+        <div id="state4" class="state"></div>
+        <div id="state5" class="state"></div>
+        <div id="state6" class="state"></div>
       </article>
 
       <div class="desc">
@@ -527,10 +541,30 @@
 <script>
   /* Rércupération des composants utiles */
   const messageDisplay = document.getElementById('message')
-  const stateDisplay = document.getElementById('state')
   const headerBackground = document.getElementById('header-background')
-  const AreaPhoneId = document.getElementById('phoneId')
+
+  const NumAreas = [1, 2, 3, 4, 5, 6].map(
+    (i) => {
+      return document.getElementById('num' + i.toString())
+  })
+
+  const StateDivs = [1, 2, 3, 4, 5, 6].map(
+    (i) => {
+      return document.getElementById('state' + i.toString())
+  })
+
+  let stateDisplay = StateDivs[0]
+
   const AreaMasterAdress = document.getElementById('masterAdress')
+
+  let frequences = [
+                      [697, 1209],
+                      [697, 1336],
+                      [697, 1477],
+                      [770, 1209],
+                      [770, 1336],
+                      [770, 1477]
+                    ];
 
   /* Informations globales sur le client */
   let running = true;
@@ -596,6 +630,19 @@
   }
 
 
+  /**
+   * Permet de changer le spot utilisé
+   * num : entier compris entre 1 et 6
+   */
+  const switchSpot = (num) => {
+    const [frequence1, frequence2] = frequences[num - 1];
+    document.getElementById('frequence1').value = frequence1;
+    document.getElementById('frequence2').value = frequence2;
+
+    stateDisplay = StateDivs[num-1];
+  }
+
+
 
   /**
    * Permet de changer la couleur de la lampe qui affiche l'état de la lumière attendu par le client.
@@ -641,8 +688,8 @@
   function connect() {
     /* Récupération des données entrées par l'utilisateur */
     var masterAdress = AreaMasterAdress.value
-    var phoneId = AreaPhoneId.value
-    if (phoneId == '') return;  												//on s'assure que les champs sont bien remplis
+    var roomNumbers = NumAreas.map(area => area.value)
+    var phoneId = roomNumbers.join(',')
 
     /* Création de la socket et connexion au serveur, lancement du KeepAlive */
     socket = new WebSocket(masterAdress);
@@ -656,13 +703,15 @@
       console.log("received :" + msg)
       messageDisplay.innerHTML = msg
 
-      if (msg === "on" + phoneId && !stateDisplay.classList.contains('on')) {
-        sendPulse()
+      for (let i = 0; i < 6; i++) {
+        num = roomNumbers[i]
+        if ((msg === "on" + num && !StateDivs[i].classList.contains('on')) || (msg === "off" + num && StateDivs[i].classList.contains('on'))) {
+          switchSpot(i+1)
+          sendPulse()
+        }
       }
-      else if (msg === "off" + phoneId && stateDisplay.classList.contains('on')) {
-        sendPulse()
-      }
-      else if (msg === "end") {
+
+      if (msg === "end") {
         running = false;
         socket.close();
         document.body.style.background = 'white';
@@ -686,7 +735,7 @@
       console.log(phoneId)
 
       document.getElementById('connexion').classList.add('connected')
-      document.getElementById('connexion').innerHTML = "Connexion réussie. Numéro de piaule : " + phoneId + ". Adresse du serveur : " + masterAdress + ".";
+      document.getElementById('connexion').innerHTML = "Connexion réussie. Id : " + phoneId + ". Adresse du serveur : " + masterAdress + ".";
     }
 
   }

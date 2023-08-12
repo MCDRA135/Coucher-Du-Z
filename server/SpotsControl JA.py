@@ -183,9 +183,9 @@ def UpdateLights(frame= [] , x =0 ,y = 0):
                     if int(cli['id']) == cellId[i][j]:
                         client = cli
                 if sgmap[i][j] == 1:
-                    server.send_message(client,"on" + client["name"])
+                    server.send_message(client,"on" + infos['cellNames'][i][j])
                 else:
-                    server.send_message(client,"off" + client["name"])
+                    server.send_message(client,"off" + infos['cellNames'][i][j])
                             
     
 #============= création des classes ================
@@ -600,17 +600,16 @@ def message_received(client, server, message):
 
     if message[:4] == "id =":
         name = message[4:]
+        names = name.split(sep=',')
+        client["name"] = name ## Le nom donné au client correspond aux numéros des piaules qui lui correspondent, séparés par des virgules
         for i in range(Nrow):
             for j in range(Ncol):
-                if name == infos['cellNames'][i][j]:
+                if infos['cellNames'][i][j] in names:
                     cellId[i][j] = int(client['id'])
-                    client["name"] = name ## Le nom correspond à l'id de piaule
                     interface.w.itemconfigure(interface.w.infoTriangle[i][j] , fill = '#0F0')
-                    print(np.array(cellId))
-                    UpdateLights(frame = sgmap)
-                    return
-        print("identifiant non reconnu")
-        server.send_message(client,'identifiant non reconnu')
+        print(np.array(cellId))
+        UpdateLights(frame = sgmap)
+        return
                 
             
     if message == "KeepAlive":

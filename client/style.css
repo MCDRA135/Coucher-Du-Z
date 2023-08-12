@@ -84,7 +84,7 @@ header .window {
 /* Ecran de base connexion */
 section#connexion {
     width: 100%;
-    height: 25vh;
+    height: 50vh;
 
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.75) inset;
     background-color: white;
@@ -328,28 +328,33 @@ textarea#duration {
 }
 
 .preset button {
-    width: 2.5vw !important;
-    height: 2.5vw !important;
+    width: 2vw !important;
+    height: 2vw !important;
     margin: .3vw;
 }
 
-#state {
-    width: 11vw;
-    height: 11vw;
+section#gestion article.stateList {
+    display: flex;
+    flex-direction: row;
+}
+
+.state {
+    width: 3vw;
+    height: 3vw;
+
+    margin: 0.1vw;
 
     background-color: black;
-    border-radius: 1.5vw;
+    border-radius: 0.5vw;
     box-shadow: 0px 0px 1vw -.5vw rgba(0, 0, 0, 0.75);
 
     transition: all .1s;
 }
 
-#state.on {
+.state.on {
     background-color: var(--yellow-color);
     box-shadow: 0px 0px 1vw -1vw rgba(255, 255, 255, 0.75);
 }
-
-
 
 section#tutorial {
     position: relative;
